@@ -19,7 +19,7 @@ const Results = (props) => {
         // ;; Recomendacion
         setPredicts(data.predicciones)
       } catch (error) {        
-        console.error("Error al procesar request : " + error);
+        console.error("Frontent dice  : " + error);
       } finally {
         console.log('Proceso terminado');
       }
