@@ -17,7 +17,7 @@ const Datatable = () => {
   //Visit https://react.dev/warnings/invalid-hook-call-warning for more info about Hooks
 
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
 
     try {
 
@@ -26,20 +26,20 @@ const Datatable = () => {
       if (!fileUpload) {
         console.log("No se encontro ningun archivo")
       }
-  
+
       //Upload file to endpoint POST Method   
-  
+
       //   //Object necessery to load file
       const formData = new FormData();
       formData.append("file", fileUpload);
-  
-  
+
+
       const response = fetch('http://127.0.0.1:5000/upload', {
         method: "POST",
         body: formData
       });
-  
-  
+
+
       return console.log("Respuesta : " + response.json())
       //   //Al setear el estado, accede directamente a la propiedad predictions en lugar de todo el objeto data:
       //   // ;; Recomendacion
@@ -49,41 +49,53 @@ const Datatable = () => {
     } finally {
       console.log('Proceso terminado');
     }
-  
-    //Aqui hace el proceso para mostrarlo con el render en la tabla  
-  
-    //const file = event.target.files[0];
-    const text = fileUpload.text();
-  
-    Papa.parse(text, {
-      header: true,
-      // Esta opción permite que 'papaparse' intente automáticamente convertir los valores 
-      // analizados a los tipos de datos apropiados (números, fechas, booleanos, etc.). Esto puede ser especialmente útil si tienes campos numéricos en tu archivo CSV.
-      dynamicTyping: true,
-      // Esta opción le indica a 'papaparse' que ignore las líneas vacías en el archivo CSV durante 
-      //el proceso de análisis. Esto puede ser útil para evitar errores o problemas al analizar filas vacías.
-      skipEmptyLines: true,
-      complete: (result) => {
-        const { data, meta, errors } = result;
-  
-        if (errors.length === 0) {
-          setCSVData(data);
-          setCSVHeader(meta.fields);
-        } else {
-          console.error('Error parsing CSV:', errors);
-        }
-      },
-    });
+
+    //Aqui hace el proceso para mostrarlo con el render en la tabla   
 
 
   }
 
-  
 
 
-  //Capturar informacion del evento submit
+
+  //Capturar informacion cuando se detecta un comportamiento diferente, change ; Diferente del evento enviar
   const handleFileChange = (e) => {
     setFileUpload(e.target.files[0]);
+
+    const file = e.target.files[0]
+
+
+    //Este proceso que sigue es necesario ya que no recibe el archivo con un formato adecuado para su lectura
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const text = reader.result;
+
+      Papa.parse(text, {
+
+        header: true,
+        // Esta opción permite que 'papaparse' intente automáticamente convertir los valores 
+        // analizados a los tipos de datos apropiados (números, fechas, booleanos, etc.). Esto puede ser especialmente útil si tienes campos numéricos en tu archivo CSV.
+        dynamicTyping: true,
+        // Esta opción le indica a 'papaparse' que ignore las líneas vacías en el archivo CSV durante 
+        //el proceso de análisis. Esto puede ser útil para evitar errores o problemas al analizar filas vacías.
+        skipEmptyLines: true,
+        complete: (result) => {
+          const { data, meta, errors } = result;
+
+          if (errors.length === 0) {
+            setCSVData(data);
+            setCSVHeader(meta.fields);
+          } else {
+            console.error('Error parsing CSV:', errors);
+          }
+        },
+
+      });
+    }
+
+    reader.readAsText(file);
+
   }
 
 
