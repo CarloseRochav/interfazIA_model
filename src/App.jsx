@@ -16,7 +16,7 @@ function App() {
   return (
     <>
 
-      <Videobackground/>      
+      {/* <Videobackground/>       */}
 
       <h1 className='title'>Prediccion  de  grupos</h1>
 

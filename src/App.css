@@ -30,9 +30,7 @@
   border-image: 
     linear-gradient(
       to top, /*to bottom*/
-      #00d4ff, 
-      #ab16d7,
-      #c4be79      
+      rgba(2,0,36,1) 13%, rgba(9,121,60,1) 89%    
     ) 1 /*100%*/;
     
     
