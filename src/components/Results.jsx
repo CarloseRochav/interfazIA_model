@@ -36,7 +36,7 @@ const Results = (props) => {
 
   return (
     <div>
-    <h3>Resultados :</h3>
+    <h3>Grupos :</h3>
 
         {/* Clase de bootstrap para quitar la viñeta */}
         <ul className='list-inline'> 

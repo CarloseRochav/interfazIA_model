@@ -11,49 +11,50 @@ import Form from 'react-bootstrap/Form';
 const Datatable = () => {
 
   const [csvData, setCSVData] = useState([]);
-  const [csvHeader, setCSVHeader] = useState([]);  
+  const [csvHeader, setCSVHeader] = useState([]);
+  const [fileUpload, setFileUpload] = useState(null)//Estado para almacenar el archivo recibido
+  //Hooks can only be called inside of the body of a function component. 
+  //Visit https://react.dev/warnings/invalid-hook-call-warning for more info about Hooks
 
-  const handleFileChange = async (event) => {
 
-    //const [fileUpload, setFileUpload] = await useState(null)//Estado para almacenar el archivo recibido
+  const handleSubmit = async (e)=>{
 
     try {
 
-      //await setFileUpload(event.target.files[0])
-     
+
       //Validar que el archivo existe
       if (!fileUpload) {
         console.log("No se encontro ningun archivo")
       }
-
+  
       //Upload file to endpoint POST Method   
-
-    //   //Object necessery to load file
-    //   const formData = new FormData();
-    //   formData.append("file", fileUpload);
-
-
-    //   const response = await fetch('http://127.0.0.1:5000/upload', {
-    //     method: "POST",
-    //     body: formData
-    //   });
-
-      
-    //   return console.log("Respuesta : " + response.json())
-    //   //Al setear el estado, accede directamente a la propiedad predictions en lugar de todo el objeto data:
-    //   // ;; Recomendacion
-    //setPredicts(data.predicciones)
-     } catch (error) {
-       console.error("Error al procesar request : " + error);
-     } finally {
-       console.log('Proceso terminado');
-     }
-
+  
+      //   //Object necessery to load file
+      const formData = new FormData();
+      formData.append("file", fileUpload);
+  
+  
+      const response = fetch('http://127.0.0.1:5000/upload', {
+        method: "POST",
+        body: formData
+      });
+  
+  
+      return console.log("Respuesta : " + response.json())
+      //   //Al setear el estado, accede directamente a la propiedad predictions en lugar de todo el objeto data:
+      //   // ;; Recomendacion
+      //setPredicts(data.predicciones)
+    } catch (error) {
+      console.log("Error al procesar request : " + error);
+    } finally {
+      console.log('Proceso terminado');
+    }
+  
     //Aqui hace el proceso para mostrarlo con el render en la tabla  
-
-    const file = event.target.files[0];
-    const text = await file.text();
-
+  
+    //const file = event.target.files[0];
+    const text = fileUpload.text();
+  
     Papa.parse(text, {
       header: true,
       // Esta opción permite que 'papaparse' intente automáticamente convertir los valores 
@@ -64,7 +65,7 @@ const Datatable = () => {
       skipEmptyLines: true,
       complete: (result) => {
         const { data, meta, errors } = result;
-
+  
         if (errors.length === 0) {
           setCSVData(data);
           setCSVHeader(meta.fields);
@@ -73,19 +74,35 @@ const Datatable = () => {
         }
       },
     });
-  };
+
+
+  }
 
   
+
+
+  //Capturar informacion del evento submit
+  const handleFileChange = (e) => {
+    setFileUpload(e.target.files[0]);
+  }
+
+
   return (
     <div>
       <h3>DataSet</h3>
 
       {/* <input type="file" accept=".csv" onChange={handleFileChange} /> */}
       {/* Form.Group : Dentro de estos componentes se carga el archivo a mostrar */}
-      <Form.Group controlId="formFile" className="mb-3">
+      {/* <Form.Group controlId="formFile" className="mb-3">
         <Form.Label><span className="gradient-text">Cargar Archivo</span></Form.Label>
         <Form.Control type="file" accept=".csv" onChange={handleFileChange} className="bg-dark text-white " />
-      </Form.Group>
+      </Form.Group> */}
+
+
+      <form onSubmit={handleSubmit}>
+        <input type="file" onChange={handleFileChange} />
+        <button type="submit">Enviar</button>
+      </form>
 
       <div className="csv-table-container container-fluid">
         {csvData.length > 0 && (
@@ -107,8 +124,8 @@ const Datatable = () => {
               ))}
             </tbody>
           </Table>
-        )}      
-      </div>      
+        )}
+      </div>
     </div>
   )
 }
