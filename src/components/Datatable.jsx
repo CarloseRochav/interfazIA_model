@@ -56,8 +56,6 @@ const Datatable = () => {
   }
 
 
-
-
   //Capturar informacion cuando se detecta un comportamiento diferente, change ; Diferente del evento enviar
   const handleFileChange = (e) => {
     setFileUpload(e.target.files[0]);
@@ -111,10 +109,12 @@ const Datatable = () => {
       </Form.Group> */}
 
 
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">Enviar</button>
-      </form>
+      
+        <form onSubmit={handleSubmit}>
+          <input type="file" onChange={handleFileChange} />
+          <button type="submit">Enviar</button>
+        </form>
+      
 
       <div className="csv-table-container container-fluid">
         {csvData.length > 0 && (
