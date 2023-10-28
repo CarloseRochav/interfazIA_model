@@ -1,9 +1,10 @@
 #root {
-  max-width: 1280px;
+  max-width: 100vw; 
+  /* El usar el "vw" instead vh or px garantiza usar su total amplitud */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
-  
+
 }
 
 /* .card {
@@ -25,24 +26,25 @@
   max-width: 100vh;
   padding: 1rem;
   color: white;
-  border-width: 6px;
+  
+  border-width: 5px;
   border-style: solid;
-  border-image: 
+  border-image:
     linear-gradient(
       to top, /*to bottom*/
-      rgba(2,0,36,1) 13%, rgba(9,121,60,1) 89%    
+      rgba(2,0,36,1) 13%, rgba(9,121,60,1) 89%
     ) 1 /*100%*/;
-    
-    
+
+
 }
 
-.main{    
+.main{
   margin: 2rem;
   /* opacity: 80%; */
   background-color: #ffe5f3;
 }
 
-#background-video {
+/* #background-video {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
@@ -52,6 +54,7 @@
   top: 0;
   bottom: 0;
   z-index: -1;
-}
+} */
+
 
 

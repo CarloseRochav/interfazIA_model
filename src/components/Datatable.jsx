@@ -109,12 +109,13 @@ const Datatable = () => {
       </Form.Group> */}
 
 
-      
+      <div className="mb-3">
         <form onSubmit={handleSubmit}>
-          <input type="file" onChange={handleFileChange} />
-          <button type="submit">Enviar</button>
+          <input className="form-control" type="file" onChange={handleFileChange} />
+          <button className="btn btn-outline-secondar m-2" type="submit">Enviar</button>
         </form>
-      
+      </div>
+
 
       <div className="csv-table-container container-fluid">
         {csvData.length > 0 && (

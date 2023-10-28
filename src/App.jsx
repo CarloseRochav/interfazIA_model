@@ -7,6 +7,7 @@ import Home from './Home';
 import Navigationbar from './components/Navigationbar';
 
 import {BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/grupos" element={<Results/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
 
     </BrowserRouter>

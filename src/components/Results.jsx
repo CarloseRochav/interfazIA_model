@@ -35,7 +35,7 @@ const Results = (props) => {
 
 
   return (
-    <div>
+    <div className='Results'>
 
       <div className="text-black module main">
 
