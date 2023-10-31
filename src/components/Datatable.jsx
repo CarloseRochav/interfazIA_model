@@ -1,9 +1,8 @@
 //import React from 'react'
 import Papa from "papaparse"
 import React, { useState } from 'react';
-import { readString } from 'react-papaparse';
 import Table from 'react-bootstrap/Table';
-import Form from 'react-bootstrap/Form';
+
 
 
 
@@ -20,7 +19,6 @@ const Datatable = () => {
   const handleSubmit = async (e) => {
 
     try {
-
 
       //Validar que el archivo existe
       if (!fileUpload) {
