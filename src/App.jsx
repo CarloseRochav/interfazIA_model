@@ -11,7 +11,6 @@ import Dashboard from './components/Dashboard';
 
 
 
-
 function App() {
 
   const numerosPrimos = [2, 4, 6, 8, 10]
@@ -28,7 +27,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
 
+
     </BrowserRouter>
+
+    
   )
 }
 

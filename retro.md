@@ -15,3 +15,9 @@
 
 
 ### Enviar archivo a server desde react fetch
+
+
+### Alternativa a Alert : react-modal
+
+- Para mostrar la pregunta y opciones de forma emergente, similar a un alert, podemos utilizar un modal en React.
+

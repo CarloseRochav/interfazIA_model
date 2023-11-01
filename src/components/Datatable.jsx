@@ -98,15 +98,7 @@ const Datatable = () => {
   return (
     <div>
       <h3>DataSet</h3>
-
-      {/* <input type="file" accept=".csv" onChange={handleFileChange} /> */}
-      {/* Form.Group : Dentro de estos componentes se carga el archivo a mostrar */}
-      {/* <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label><span className="gradient-text">Cargar Archivo</span></Form.Label>
-        <Form.Control type="file" accept=".csv" onChange={handleFileChange} className="bg-dark text-white " />
-      </Form.Group> */}
-
-
+      
       <div className="mb-3">
         <form onSubmit={handleSubmit}>
           <input className="form-control" type="file" onChange={handleFileChange} />
