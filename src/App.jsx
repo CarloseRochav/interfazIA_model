@@ -3,17 +3,16 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Results from './components/Results';
 import Home from './Home';
+import Report from './pages/Report';
 
 import Navigationbar from './components/Navigationbar';
 
 import {BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 
-
-
 function App() {
 
-  const numerosPrimos = [2, 4, 6, 8, 10]
+  // const numerosPrimos = [2, 4, 6, 8, 10]
 
   return (
     <BrowserRouter>  
@@ -25,12 +24,9 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/grupos" element={<Results/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/report" element={<Report/>}/>
       </Routes>
-
-
-    </BrowserRouter>
-
-    
+    </BrowserRouter>    
   )
 }
 

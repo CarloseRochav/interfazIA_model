@@ -20,6 +20,7 @@ export default function Navigationbar() {
           <Nav className="me-auto">
             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
             <Nav.Link href="/grupos">Grupos</Nav.Link>           
+            <Nav.Link href="/report">Report</Nav.Link>           
           </Nav>
         </Container>
       </Navbar>      

@@ -1,52 +1,33 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import '../App.css'
-
-
+import { funciones } from './Functions'
 
 //Utilizar modal con react 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-
-
 const Results = (props) => {
 
 
+  //Uso de States
   const [predicts, setPredicts] = useState([]);//O []
   const [question, setQuestion] = useState({
     text: "¿Desea continuar?",
     answer: ""
-  }); //To handle the question to validate the Updating Event
-  const [visible, setVisible] = useState(false);  //Manejar visibilidad 
+  }); //To handle the question to validate the Updating Event  
   const [showMessage, setShowMessage] = useState(false); //Manejar tiempo para mostrar mensaje
   const [isOpen, setIsOpen] = useState(false);
 
-
-  //Request para obtener las predicciones
-  const getPredictions = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/train');
-      const data = await response.json();
-      //Al setear el estado, accede directamente a la propiedad predictions en lugar de todo el objeto data:
-      // ;; Recomendacion
-      setPredicts(data.predicciones)
-    } catch (error) {
-      console.error("Frontend dice  : " + error);
-    } finally {
-      console.log('Proceso terminado');
-    }
-  };
+ 
 
   //Mostra confirmacion para actulizar documento
   const toggleVisibility = () => {
-    setVisible(true);
     setIsOpen(true)
-
   }
 
   //Impresion de predicciones+    
-  console.log("Predicciones  : " + predicts)//Forma correcta de imprimir los valores de predicciones del objeto
+  console.log("Predicciones  : " + predicts)//Forma correcta de imprimir los valores de predicciones del objeto 
 
 
   //Funcion para manejar respuestas
@@ -85,34 +66,25 @@ const Results = (props) => {
       }
       finally {
         setIsOpen(false);
-        setVisible(false)
         setShowMessage(true)
+
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 5000); // desaparece después de 5 segundos
+
       }
     }
 
     if (answer === "No") {
       setIsOpen(false)
-      setVisible(false);
     }
 
     setQuestion({
       ...question,
       answer
     });
+    
   }
-
-
-  useEffect(() => {
-    // código a ejecutar
-
-    setShowMessage(true);
-
-    setTimeout(() => {
-      setShowMessage(false);
-    }, 3000); // desaparece después de 5 segundos
-
-  }, []);
-
 
   return (
     <div className='Results'>
@@ -130,7 +102,7 @@ const Results = (props) => {
           )}
         </ul>
         {/* Boton para llamar al evento de fetch y desplegar en la lsita*/}
-        <button className='glow-on-hover m-2' onClick={() => getPredictions()}>Entrenar</button>
+        <button className='glow-on-hover m-2' onClick={async ()=> setPredicts(await funciones.getData())}>Entrenar</button>
         <button className='glow-on-hover m-2' onClick={toggleVisibility}>Agregar</button>
       </div>
 
@@ -151,8 +123,6 @@ const Results = (props) => {
 
 
       {/* Utilizacion de modal como alternativa a "Alert" element */}
-
-
       <Modal
         isOpen={isOpen}
         onRequestClose={() => { handleClick("No") }}>
@@ -160,10 +130,10 @@ const Results = (props) => {
 
         <div className="modal-body w-50 h-25 p-5">
 
-        <h2 className='display-4'>¿Deseas actualizar el documento?</h2>
+          <h2 className='display-4'>¿Deseas actualizar el documento?</h2>
 
-        <button className="btn btn-success m-2" onClick={() => {/*opción Sí*/; handleClick("Si"); }}>Sí</button>
-        <button className="btn btn-danger m-2" onClick={() => {/*opción No*/; handleClick("No"); }}>No</button>
+          <button className="btn btn-success m-2" onClick={() => {/*opción Sí*/; handleClick("Si"); }}>Sí</button>
+          <button className="btn btn-danger m-2" onClick={() => {/*opción No*/; handleClick("No"); }}>No</button>
 
         </div>
 
