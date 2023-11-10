@@ -20,21 +20,15 @@ const Datatable = () => {
   const handleFileChange = async (e) => {
     await setFileUpload(e.target.files[0]);
 
-    //const file = e.target.files[0]
-
-
-    //Errores en la desestructuración
-    const {data,meta,errors} = await funciones.castFile(fileUpload)
-    const result = await funciones.castFile(fileUpload)
-    console.log("Resultados Getting : "+result)
-    await setCSVData(data);
-    await setCSVHeader(meta.fields);
-
-    //__Cortado Paaparse
-
+    if(!(fileUpload instanceof Blob)) {
+      throw new Error('El parámetro debe ser un Blob');
+    }    
     
+    const results = await funciones.castFile(fileUpload)
+    const {data,meta,errors} = results 
+    await setCSVData(data);
+    await setCSVHeader(meta.fields);    
   }
-
 
   return (
     <div>

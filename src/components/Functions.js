@@ -53,59 +53,77 @@ const uploadFile = async (file)=>{
 
 }
 
-const castFile = (file)=>{
-    
-
+const castFile = async (file)=>{    
     //var response;
     //Este proceso que sigue es necesario ya que no recibe el archivo con un formato adecuado para su lectura
     const reader = new FileReader();
 
-    reader.onload = () => {
-      const text = reader.result;
+    const text = await new Promise((resolve) => {
+      reader.onload = () => {
+        resolve(reader.result);  
+      }
+      reader.readAsText(file); 
+    });
 
-      Papa.parse(text, {
-
-        header: true,
-        // Esta opción permite que 'papaparse' intente automáticamente convertir los valores 
-        // analizados a los tipos de datos apropiados (números, fechas, booleanos, etc.). Esto puede ser especialmente útil si tienes campos numéricos en tu archivo CSV.
-        dynamicTyping: true,
-        // Esta opción le indica a 'papaparse' que ignore las líneas vacías en el archivo CSV durante 
-        //el proceso de análisis. Esto puede ser útil para evitar errores o problemas al analizar filas vacías.
-        skipEmptyLines: true,
-        complete: (result) => {
-          const { data, meta, errors } = result;
-          if (errors.length === 0) {
-            // setCSVData(data);
-            // setCSVHeader(meta.fields);
-            console.log(result)
-            return result
-          } else {
-            return errors
-          }
-        },
-      });
-    }   
-
-    return reader.readAsText(file);    
-
-    
+    const result = await Papa.parse(text, {
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: true, 
+      complete: (results) => {
+        console.log(results)
+        return results
+      }
+    });
+  
+    return result;   
 
 }//Pendiente no se realiza la desustruturacion bien en el frontentd
 
 
 
-//Funcion para obtener datable/DataSource
-const getDataSource = async ()=>{
+const addNewPredicts = async (predicts)=>{
+
+  try{
+    //Validar que el archivo existe
+    if (!predicts) {
+      console.log("No existe valor en predicciones")
+    }
+
+    console.log("Predicciones a enviar : ", predicts)
+
+    const request = await fetch("http://127.0.0.1:5000/update", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(predicts)
+
+    });
+
+    const response = await request.json()
+    // [object Promise]", indicates that you are trying to log a Promise 
+    // object to the console instead of the resolved value of the Promise. This is because 
+    // Promises are asynchronous and return immediately, before the data is actually  available. 
+
+    console.log("Estatus : " + response.messagge)
+    // The error message you are seeing, "[object object]", suggests that you are 
+    // trying to log an object to the console without specifying which property or value you want to log.              
+
+
+  } catch (error) {
+    console.error("Validate Error : " + error)
+  }
+
+
+
 }
-
-
 
 
 export const funciones = {
     getData: getData,
     uploadFile: uploadFile,
     castFile:castFile,
-    funcion2: () => {console.log("hola Mundo")},    
+    addNewPredicts: addNewPredicts,    
   }
 
 
