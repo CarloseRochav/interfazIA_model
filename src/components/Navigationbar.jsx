@@ -1,12 +1,16 @@
 // Navbar.js
 import React from 'react'
-import {Link } from 'react-router-dom';
+//import {Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+// import { useNavigate } from 'react-router-dom'; 
+// import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 
 export default function Navigationbar() {
+
+  
   return (
     // <nav>
     //   <Link to="/">Inicio</Link>

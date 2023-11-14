@@ -2,17 +2,16 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import '../App.css'
 import { funciones } from './Functions'
+import { useNavigate } from 'react-router-dom';
 //para redireccionamiento
-import { useHistory } from 'react-router-dom'; 
 
 
-
-//Utilizar modal con react 
+//Utilizar modal con react ; instead de "alert"
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-const Results = (props) => {
 
+const Results = (props) => {
 
   //Uso de States
   const [predicts, setPredicts] = useState([]);//O []
@@ -22,9 +21,8 @@ const Results = (props) => {
   }); //To handle the question to validate the Updating Event  
   const [showMessage, setShowMessage] = useState(false); //Manejar tiempo para mostrar mensaje
   const [isOpen, setIsOpen] = useState(false);
-  const history = useHistory(); 
 
-
+  const navigate = useNavigate()// Metodo para poder hacer redireccion de componentes/paginas 
 
   //Mostra confirmacion para actulizar documento
   const toggleVisibility = () => {
@@ -44,7 +42,8 @@ const Results = (props) => {
 
       setIsOpen(false);
       setShowMessage(true)
-      window.location.href = "/report"
+      //window.location.href = "/report"
+      navigate("/report") //redireccion al componente de "report"
 
       setTimeout(() => {
         setShowMessage(false);
