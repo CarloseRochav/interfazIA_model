@@ -113,8 +113,18 @@ const addNewPredicts = async (predicts)=>{
   } catch (error) {
     console.error("Validate Error : " + error)
   }
+}
 
 
+const getFile = async ()=>{
+
+  const response = await fetch("http://127.0.0.1:5000/uploads/tableClaude.csv");
+  const reader = response.body.getReader();
+  const result = await reader.read();
+  const decoder = new TextDecoder('utf-8');
+  const csv = decoder.decode(result.value);
+  const parsed = Papa.parse(csv, { header: true });
+  return parsed
 
 }
 
@@ -124,6 +134,7 @@ export const funciones = {
     uploadFile: uploadFile,
     castFile:castFile,
     addNewPredicts: addNewPredicts,    
+    getFile:getFile
   }
 
 
