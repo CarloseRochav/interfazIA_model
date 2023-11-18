@@ -2,25 +2,14 @@ import React, { useState } from 'react';
 import { useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
-//const MY_FILE_PATH = "my-file.js";
-//const MY_FILE_PATH = "C:\Users\carloserochav\Documents\Residencia\Backend\ia_modelForestRegression\apiRest\recibidos\tableClaude.csv";
-//const file = MY_FILE_PATH
-// process.env.set(MY_FILE_PATH, require.resolve(MY_FILE_PATH));
 import { funciones } from '../components/Functions';
-
-
 
 
 const Report = () => {
 
   const [data, setData] = useState([]);
   const [headers, setHeaders] = useState([]);
-  const [statistics, setStatistics] = useState({
-    mean: null,
-    median: null,
-    mode: null
-  });
-
+  const [statistics, setStatistics] = useState({});
 
   async function fetchData() {
     const parsed = await funciones.getFile();
@@ -29,22 +18,33 @@ const Report = () => {
   }
 
 
-  async function fetchStatistics() {
-    const response = await fetch('http://127.0.0.1:5000/statistics');
-    const data = await response.json();
-    
-    setStatistics({
-      mean: data.mean,
-      median: data.median,
-      mode: data.mode
-    })    
-  }
+  // async function fetchStatistics() {
+  //   const response = await fetch('http://127.0.0.1:5000/statistics');
+  //   const data = await response.json();
+
+  //   await setStatistics(data)    
+  //   console.log("Esta es la data "+ JSON.stringify(data))
+  //   console.log(" Mean "+data.mean)  
+  // }
+
 
   //Importancion de archivo a mostrar en tabla
   useEffect(() => {
     fetchData()
-    fetchStatistics()    
-  }, [location]);
+
+    const fetchStats = async () => {
+      const response = await fetch('http://127.0.0.1:5000/statistics');
+      const data = await response.json();
+      setStatistics(data);
+    }
+
+    fetchStats();
+  }, [statistics]);
+
+  useEffect(() => {
+    // aquí sí está seguro acceder
+    // console.log(statistics.mean)
+  }, [statistics])
 
 
   const columnLengths = headers.map((header) => {
@@ -63,7 +63,7 @@ const Report = () => {
               <h3 className='display-7 text-white'>Promedio</h3>
               <ul className='list-inline'>
                 {/* {statistics.mean} */}
-                {statistics.mean.map((value, index) =>
+                {statistics.mean && statistics.mean.map((value, index) =>
                   <li key={index}>
                     Semestre {index + 1} : {value}
                   </li>
@@ -72,9 +72,9 @@ const Report = () => {
             </div>
             <div className="col-sm">
               <h3 className='display-7 text-white'>Mediana</h3>
-              <ul className='list-inline'>
-                {/* {statistics.mean} */}
-                {statistics.median.map((value, index) =>
+              <ul className='list-inline'>              
+               
+                {statistics.median && statistics.median.map((value, index) =>
                   <li key={index}>
                     Semestre {index + 1} : {value}
                   </li>
@@ -85,7 +85,7 @@ const Report = () => {
               <h3 className='display-7 text-white'>Moda</h3>
               <ul className='list-inline'>
                 {/* {statistics.mean} */}
-                {statistics.mode.map((value, index) =>
+                {statistics.mode && statistics.mode.map((value, index) =>
                   <li key={index}>
                     Semestre {index + 1} : {value}
                   </li>
@@ -93,6 +93,7 @@ const Report = () => {
               </ul>
             </div>
           </div>
+
           <div className="row mt-5">
 
             <h2 className='display-3 text-white'>Tabla</h2>
