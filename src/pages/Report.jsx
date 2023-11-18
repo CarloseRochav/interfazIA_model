@@ -39,12 +39,12 @@ const Report = () => {
     }
 
     fetchStats();
-  }, [statistics]);
+  }, []);
 
-  useEffect(() => {
-    // aquí sí está seguro acceder
-    // console.log(statistics.mean)
-  }, [statistics])
+  // useEffect(() => {
+  //   // aquí sí está seguro acceder
+  //   // console.log(statistics.mean)
+  // }, [statistics])
 
 
   const columnLengths = headers.map((header) => {
