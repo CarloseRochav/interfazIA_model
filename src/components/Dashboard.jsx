@@ -7,7 +7,7 @@ const Dashboard = () => {
         <div>
             <div className='containerWhole'>
 
-                <h1 className='title'>Prediccion  de  grupos</h1>
+                <h1 className='title'>Predicción  de  grupos</h1>
 
                 {/* <button onClick={() => setCount((count) => count + 1)}>
 count is {count}
@@ -15,7 +15,7 @@ count is {count}
                 {/* <Results numerosPrimos={numerosPrimos} /> */}
                 <Results />
 
-                <div className='text-black module main'>
+                <div className='text-black module main shadow-lg'>
                     <Datatable />
                 </div>
                 {/* <div>

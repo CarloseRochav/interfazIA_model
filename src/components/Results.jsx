@@ -64,9 +64,7 @@ const Results = (props) => {
 
   return (
     <div className='Results'>
-
-      <div className="text-black module main">
-
+      <div className="text-black module main shadow-lg">
         <h3>Grupos :</h3>
 
         {/* Clase de bootstrap para quitar la viñeta */}

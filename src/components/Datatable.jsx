@@ -32,8 +32,7 @@ const Datatable = () => {
 
   return (
     <div>
-      <h3>DataSet</h3>
-      
+      <h3>DataSet</h3>      
       <div className="mb-3">
         <form onSubmit={handleSubmit}>
           <input className="form-control" type="file" onChange={handleFileChange} />

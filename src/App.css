@@ -27,15 +27,13 @@
   padding: 1rem;
   color: white;
   
-  border-width: 5px;
+  /* border-width: 5px;
   border-style: solid;
-  border-image:
-    linear-gradient(
-      to top, /*to bottom*/
+  border-image: */
+    /* linear-gradient(
+      to top, 
       rgba(2,0,36,1) 13%, rgba(9,121,60,1) 89%
-    ) 1 /*100%*/;
-
-
+    ) 1 /*100%*/; */
 }
 
 .main{

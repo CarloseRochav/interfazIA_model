@@ -8,9 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 // import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 
-export default function Navigationbar() {
-
-  
+export default function Navigationbar() {  
   return (
     // <nav>
     //   <Link to="/">Inicio</Link>
@@ -18,7 +16,11 @@ export default function Navigationbar() {
     // </nav>
     <>
      {/* <Navbar className="navbar" bg="dark" data-bs-theme="dark"> "bg" is to set a background */}
-     <Navbar className="navbar" data-bs-theme="dark"> 
+     <Navbar className="navbar text-dark" data-bs-theme="light"> 
+      {/* La propiedad de data-bs-theme influye mucho, si se esta habilitada se va a sobreponer a la propiedad directa del color. 
+      light/dark ; si estas trabajando con un background oscuro, usar dark / background claro usar light
+      */}
+
         <Container>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav className="me-auto">

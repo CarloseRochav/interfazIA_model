@@ -31,7 +31,6 @@ const Report = () => {
   //Importancion de archivo a mostrar en tabla
   useEffect(() => {
     fetchData()
-
     const fetchStats = async () => {
       const response = await fetch('http://127.0.0.1:5000/statistics');
       const data = await response.json();
@@ -41,37 +40,31 @@ const Report = () => {
     fetchStats();
   }, []);
 
-  // useEffect(() => {
-  //   // aquí sí está seguro acceder
-  //   // console.log(statistics.mean)
-  // }, [statistics])
-
-
-  const columnLengths = headers.map((header) => {
-    const values = data.map((row) => row[header]);
-    const uniqueValues = [...new Set(values)];
-    return { header, length: uniqueValues.length, values: uniqueValues };
-  });
+  // const columnLengths = headers.map((header) => {
+  //   const values = data.map((row) => row[header]);
+  //   const uniqueValues = [...new Set(values)];
+  //   return { header, length: uniqueValues.length, values: uniqueValues };
+  // });
 
   return (
     <div>
-      <Container className='container text-white'>
-        <h1 className='display-1 color-white mb-5' >Reporte</h1>
+      <Container className='container'>
+        <h1 className='display-1 mb-5' >Reporte</h1>
         <div className="container">
           <div className="row">
             <div className="col-sm">
-              <h3 className='display-7 text-white'>Promedio</h3>
+              <h3 className='display-7'>Promedio</h3>
               <ul className='list-inline'>
                 {/* {statistics.mean} */}
                 {statistics.mean && statistics.mean.map((value, index) =>
-                  <li key={index}>
+                  <li key={index} className='text-weight-bold'>
                     Semestre {index + 1} : {value}
                   </li>
                 )}
               </ul>
             </div>
             <div className="col-sm">
-              <h3 className='display-7 text-white'>Mediana</h3>
+              <h3 className='display-7'>Mediana</h3>
               <ul className='list-inline'>              
                
                 {statistics.median && statistics.median.map((value, index) =>
@@ -82,7 +75,7 @@ const Report = () => {
               </ul>
             </div>
             <div className="col-sm">
-              <h3 className='display-7 text-white'>Moda</h3>
+              <h3 className='display-7'>Moda</h3>
               <ul className='list-inline'>
                 {/* {statistics.mean} */}
                 {statistics.mode && statistics.mode.map((value, index) =>
@@ -96,7 +89,7 @@ const Report = () => {
 
           <div className="row mt-5">
 
-            <h2 className='display-3 text-white'>Tabla</h2>
+            <h2 className='display-3'>Tabla</h2>
             <div className="table-responsive table-responsive-sm table-responsive-md">
               {/* Con esta clase de bootstrap hacemos que no rebase la anchura de la pagina */}
 
