@@ -28,16 +28,15 @@ const Report = () => {
   // }
 
 
-  //Importancion de archivo a mostrar en tabla
+  //Importancia de useEffect para renderizar en vivo/tiempo real la informacion que se solicitu al api
   useEffect(() => {
     fetchData()
-    const fetchStats = async () => {
-      const response = await fetch('http://127.0.0.1:5000/statistics');
-      const data = await response.json();
-      setStatistics(data);
-    }
-
-    fetchStats();
+    // const fetchStats = async () => {
+    //   const response = await fetch('http://127.0.0.1:5000/statistics');
+    //   const data = await response.json();
+    //   setStatistics(data);
+    // }
+    // fetchStats();
   }, []);
 
   // const columnLengths = headers.map((header) => {
@@ -65,8 +64,8 @@ const Report = () => {
             </div>
             <div className="col-sm">
               <h3 className='display-7'>Mediana</h3>
-              <ul className='list-inline'>              
-               
+              <ul className='list-inline'>
+
                 {statistics.median && statistics.median.map((value, index) =>
                   <li key={index}>
                     Semestre {index + 1} : {value}
@@ -86,9 +85,56 @@ const Report = () => {
               </ul>
             </div>
           </div>
+          {/* Graficas de todos los semestres */}
+
+
+          {/* Otra alternativa al Grid, en lugar de row y col, usar las clases de Flexbox de Bootstrap:flexbox
+          Con .d-flex makes que los elementos internos se muestren uno al lado del otro.
+          De esta manera no usamos las columnas de grid, sino flexbox puro. */}
+          <div className="d-flex">
+            <div>
+              <h3>1er Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/first" style={{ maxWidth: "80%" }} />
+            </div>
+            <div>
+              <h3>2do Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/second" style={{ maxWidth: "80%" }} />
+            </div>
+            <div>
+              <h3>3er Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/third" style={{ maxWidth: "80%" }} />
+            </div>
+          </div>
+          <div className="d-flex">
+            <div>
+              <h3>4to Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/fourth" style={{ maxWidth: "80%" }} />
+            </div>
+            <div>
+              <h3>5to Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/fifth" style={{ maxWidth: "80%" }} />
+            </div>
+            <div>
+              <h3>6to Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/sixth" style={{ maxWidth: "80%" }} />
+            </div>
+          </div>
+          <div className="d-flex">
+            <div>
+              <h3>7mo Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/seventh" style={{ maxWidth: "80%" }} />
+            </div>
+            <div>
+              <h3>8vo Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/eighth" style={{ maxWidth: "80%" }} />
+            </div>
+            <div>
+              <h3>9no Semestre</h3>
+              <img src="http://127.0.0.1:5000/stats/ninth" style={{ maxWidth: "80%" }} />
+            </div>
+          </div>
 
           <div className="row mt-5">
-
             <h2 className='display-3'>Tabla</h2>
             <div className="table-responsive table-responsive-sm table-responsive-md">
               {/* Con esta clase de bootstrap hacemos que no rebase la anchura de la pagina */}
