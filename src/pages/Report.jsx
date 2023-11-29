@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import { funciones } from '../components/Functions';
+import ReactImageMagnify from 'react-image-magnify';
 
 
 const Report = () => {
@@ -86,8 +87,6 @@ const Report = () => {
             </div>
           </div>
           {/* Graficas de todos los semestres */}
-
-
           {/* Otra alternativa al Grid, en lugar de row y col, usar las clases de Flexbox de Bootstrap:flexbox
           Con .d-flex makes que los elementos internos se muestren uno al lado del otro.
           De esta manera no usamos las columnas de grid, sino flexbox puro. */}
@@ -95,14 +94,17 @@ const Report = () => {
             <div>
               <h3>1er Semestre</h3>
               <img src="http://127.0.0.1:5000/stats/first" style={{ maxWidth: "80%" }} />
+              
             </div>
             <div>
               <h3>2do Semestre</h3>
-              <img src="http://127.0.0.1:5000/stats/second" style={{ maxWidth: "80%" }} />
+              <img src="http://127.0.0.1:5000/stats/second" style={{ maxWidth: "80%" }} />              
+              
             </div>
             <div>
               <h3>3er Semestre</h3>
-              <img src="http://127.0.0.1:5000/stats/third" style={{ maxWidth: "80%" }} />
+              <img src="http://127.0.0.1:5000/stats/third" style={{ maxWidth: "80%" }} />             
+              
             </div>
           </div>
           <div className="d-flex">

@@ -118,7 +118,7 @@ const addNewPredicts = async (predicts)=>{
 
 const getFile = async ()=>{
 
-  const response = await fetch("http://127.0.0.1:5000/uploads/tableClaude.csv");
+  const response = await fetch("http://127.0.0.1:5000/uploads/formatted.csv");
   const reader = response.body.getReader();
   const result = await reader.read();
   const decoder = new TextDecoder('utf-8');
