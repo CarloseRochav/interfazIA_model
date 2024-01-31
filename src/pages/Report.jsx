@@ -4,6 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import { funciones } from '../components/Functions';
 import ReactImageMagnify from 'react-image-magnify';
+//Utilizar modal con react ; instead de "alert"
+import Modal from 'react-modal';
+
+
+Modal.setAppElement('#root');
 
 
 const Report = () => {
@@ -11,6 +16,42 @@ const Report = () => {
   const [data, setData] = useState([]);
   const [headers, setHeaders] = useState([]);
   const [statistics, setStatistics] = useState({});
+  //State para Modal
+  const [isOpen, setIsOpen] = useState(false);
+
+   //Mostra confirmacion para actulizar documento
+   const toggleVisibility = () => {
+    setIsOpen(true)
+  }
+
+  //Funcion para manejar respuestas
+  const handleClick = async (answer) => {
+
+    if (answer === "Si") {      
+
+      setIsOpen(false);
+      setShowMessage(true)
+      //window.location.href = "/report"
+      //navigate("/report") //redireccion al componente de "report"
+
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 5000); // desaparece después de 5 segundos
+
+    }
+
+    if (answer === "No") {
+      setIsOpen(false)
+    }
+
+    setQuestion({
+      ...question,
+      answer
+    });
+
+  }
+
+
 
   async function fetchData() {
     const parsed = await funciones.getFile();
@@ -159,13 +200,40 @@ const Report = () => {
                     </tr>
                   ))}
                 </tbody>
-              </Table>
+              </Table>              
             </div>
-
           </div>
+          <button className=' m-2' onClick={toggleVisibility}>Guardar reporte</button>
         </div>
-      </Container>
 
+        {/* Utilizacion de modal como alternativa a "Alert" element */}
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={() => { handleClick("No") }}>
+        {/* Recomendacion: No pasar directamente la funcion, simo, por un callback */}
+
+        <div className="modal-body w-70 h-25 p-5">
+
+          <h2 className='display-5'>Confirmar que se agregaran las siguientes predicciones :</h2>
+          <ul className='list-inline'>
+          {/* {predicts.map((value, index) =>
+            <li key={index}>
+              Semestre {index + 1} : {value}
+            </li>
+          )} */}
+        </ul>
+          
+          <h2 className='display-5'> al siguiente periodo ?</h2>
+
+          <a className="btn btn-success" href='http://127.0.0.1:5000/save_report' download onClick={()=>{handleClick("Si")}}>Si</a>
+          <button className="btn btn-danger m-2" onClick={() => {/*opción No*/; handleClick("No"); }}>No</button>          
+
+        </div>
+
+      </Modal>
+
+
+      </Container>            
     </div>
   )
 }

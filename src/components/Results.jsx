@@ -4,12 +4,9 @@ import '../App.css'
 import { funciones } from './Functions'
 import { useNavigate } from 'react-router-dom';
 //para redireccionamiento
-
-
 //Utilizar modal con react ; instead de "alert"
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
-
 
 const Results = (props) => {
 
@@ -38,7 +35,9 @@ const Results = (props) => {
 
     if (answer === "Si") {
 
-      funciones.addNewPredicts(predicts)
+      funciones.addNewPredicts(predicts)     
+
+      saveAs(file, 'report.xlsx');
 
       setIsOpen(false);
       setShowMessage(true)
@@ -115,7 +114,7 @@ const Results = (props) => {
           
           <h2 className='display-5'> al siguiente periodo ?</h2>
 
-          <button className="btn btn-success m-2" onClick={() => {/*opción Sí*/; handleClick("Si"); }}>Sí</button>
+          <button className="btn btn-success m-2" onClick={() => {/*opción Sí*/; handleClick("Si"); }}>Sí</button>          
           <button className="btn btn-danger m-2" onClick={() => {/*opción No*/; handleClick("No"); }}>No</button>
 
         </div>

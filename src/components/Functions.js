@@ -128,13 +128,12 @@ const getFile = async ()=>{
 
 }
 
-
 export const funciones = {
     getData: getData,
     uploadFile: uploadFile,
     castFile:castFile,
     addNewPredicts: addNewPredicts,    
-    getFile:getFile
+    getFile:getFile,    
   }
 
 
