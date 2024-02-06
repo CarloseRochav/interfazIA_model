@@ -211,20 +211,8 @@ const Report = () => {
         isOpen={isOpen}
         onRequestClose={() => { handleClick("No") }}>
         {/* Recomendacion: No pasar directamente la funcion, simo, por un callback */}
-
         <div className="modal-body w-70 h-25 p-5">
-
-          <h2 className='display-5'>Confirmar que se agregaran las siguientes predicciones :</h2>
-          <ul className='list-inline'>
-          {/* {predicts.map((value, index) =>
-            <li key={index}>
-              Semestre {index + 1} : {value}
-            </li>
-          )} */}
-        </ul>
-          
-          <h2 className='display-5'> al siguiente periodo ?</h2>
-
+          <h2 className='display-5'>El reporte se descargara en formato Excel ¿Deseas realizar la descarga?</h2>          
           <a className="btn btn-success" href='http://127.0.0.1:5000/save_report' download onClick={()=>{handleClick("Si")}}>Si</a>
           <button className="btn btn-danger m-2" onClick={() => {/*opción No*/; handleClick("No"); }}>No</button>          
 

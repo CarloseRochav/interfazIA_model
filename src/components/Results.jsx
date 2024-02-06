@@ -6,6 +6,14 @@ import { useNavigate } from 'react-router-dom';
 //para redireccionamiento
 //Utilizar modal con react ; instead de "alert"
 import Modal from 'react-modal';
+//Bibliotecas del Slider
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+//const Range = createSliderWithTooltip(Slider.Range);
+
+
+
 Modal.setAppElement('#root');
 
 const Results = (props) => {
@@ -18,6 +26,27 @@ const Results = (props) => {
   }); //To handle the question to validate the Updating Event  
   const [showMessage, setShowMessage] = useState(false); //Manejar tiempo para mostrar mensaje
   const [isOpen, setIsOpen] = useState(false);
+
+  
+  
+  //Estados para establecer rangos 
+  const [range, setRange] = useState({
+    min: 0,
+    max: 100 
+  });
+
+  const handleChange = (newRange) => {
+    setRange(newRange);
+  }    
+
+  const handleSubmit = () => {
+    // enviar rango al backend
+    //print("Rangos : "+range)
+    console.log("Rangos : "+range)
+  }
+
+  
+
 
   const navigate = useNavigate()// Metodo para poder hacer redireccion de componentes/paginas 
 
@@ -35,9 +64,7 @@ const Results = (props) => {
 
     if (answer === "Si") {
 
-      funciones.addNewPredicts(predicts)     
-
-      saveAs(file, 'report.xlsx');
+      funciones.addNewPredicts(predicts)           
 
       setIsOpen(false);
       setShowMessage(true)
@@ -78,6 +105,27 @@ const Results = (props) => {
         <button className='glow-on-hover m-2' onClick={async () => setPredicts(await funciones.getData())}>Entrenar</button>
         <button className='glow-on-hover m-2' onClick={toggleVisibility}>Agregar</button>
       </div>
+
+      <div>
+      <Slider range
+        min={0}
+        max={100}        
+        defaultValue={[0, 100]}
+        onChange={handleChange}  
+        // onChangeComplete={setRange}
+      />
+
+      <button onClick={handleSubmit}>
+        Enviar Rango
+      </button>
+
+            {/* Renderiza valores seleccionados en tiempo real */}
+      <div>
+        Valores seleccionados: 
+        {range.min} - {range.max}  
+      </div>
+
+    </div>
 
 
       {/* Elemento para mostrar mensaje/aviso */}
